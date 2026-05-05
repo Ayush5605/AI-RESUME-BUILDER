@@ -85,7 +85,7 @@ const Hero = () => {
                             <span className="absolute inline-flex h-full w-full rounded-full bg-[#A6FF5D] opacity-75 animate-ping duration-300"></span>
                             <span className="relative inline-flex size-2 rounded-full bg-[#A6FF5D]"></span>
                         </div>
-                        <span className='text-xs'>Designed for Modern Websites</span>
+                        <span className='text-xs'>Build your dream resume</span>
                     </button>
                 </div>
 
