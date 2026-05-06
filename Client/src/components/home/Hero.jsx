@@ -89,12 +89,12 @@ const Hero = () => {
                 <h1 className="text-4xl md:text-[64px]/[82px] text-center max-w-4xl mt-5 bg-clip-text leading-tight px-4">
                     Land your dream job with AI-powered resumes
                 </h1>
-                <p className="text-sm md:text-base text-[#A6FF5D] bg-clip-text text-center max-w-lg mt-4.5 px-4">
+                <p className="text-sm md:text-base text-green-500 bg-clip-text text-center max-w-lg mt-4.5 px-4">
                     Create ,edit and download professional resumes with AI-powered assistance
                 </p>
 
                 <div className='flex gap-3 mt-8'>
-                    <button className="bg-[#A6FF5D] hover:bg-[#A6FF5D]/90 text-gray-800 px-6 py-2.5 rounded-full text-sm transition cursor-pointer group">
+                    <button className="bg-[#A6FF5D] hover:bg-green-600/90 text-gray-800 px-6 py-2.5 rounded-full text-sm transition cursor-pointer group">
                         <div className="relative overflow-hidden">
                             <span className="block transition-transform duration-200 group-hover:-translate-y-full">
                                 Get Started today
@@ -105,7 +105,7 @@ const Hero = () => {
                         </div>
                     </button>
                     <div className="bg-white/15 hover:bg-white/10 p-px flex items-center justify-center rounded-full hover:scale-105 transition duration-300 active:scale-100">
-                        <Link to='/app?state=login' className="px-6 text-sm py-3 text-black rounded-full bg-[#A6FF5D] hover:bg-[#A6FF5D]/90 cursor-pointer">
+                        <Link to='/app?state=login' className="px-6 text-sm py-3 text-black rounded-full bg-[#A6FF5D] hover:bg-green-800 cursor-pointer">
                             Login
                         </Link>
                     </div>
