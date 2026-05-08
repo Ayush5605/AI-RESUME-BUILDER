@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import logo from '../../assets/logo.svg';
 
 const Hero = () => {
 
@@ -39,7 +40,7 @@ const Hero = () => {
                 <nav className="flex flex-col items-center w-full" >
                     <div className="flex items-center justify-between p-4 md:px-16 lg:px-24 xl:px-32 md:py-4 w-full">
                         <a href="https://prebuiltui.com" className="hover:text-green-600">
-                            <img src="../../src/assets/logo.svg" alt="logo" className="h-11 w-auto"></img>
+                            <img src={logo} alt="logo" className="h-11 w-auto"></img>
                         </a>
                         <div id="menu" className={`${mobileOpen ? 'max-md:w-full' : 'max-md:w-0'} max-md:fixed max-md:top-0 max-md:z-10 max-md:left-0 max-md:transition-all max-md:duration-300 max-md:overflow-hidden max-md:h-screen max-md:bg-black/50 max-md:backdrop-blur max-md:flex-col max-md:justify-center flex items-center gap-8 text-sm`}>
                             <a href="#" onClick={() => setMobileOpen(false)} className="text-green-500 hover:text-green-700">Home</a>
