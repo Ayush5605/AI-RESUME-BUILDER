@@ -101,7 +101,7 @@ const Hero = () => {
                                 Get Started today
                             </span>
                             <Link to='/login?state=login#' className="absolute top-0 left-0 block transition-transform duration-200 group-hover:translate-y-0 translate-y-full ">
-                                Get Started Today
+                                Get Started today
                             </Link>
                         </div>
                     </button>
