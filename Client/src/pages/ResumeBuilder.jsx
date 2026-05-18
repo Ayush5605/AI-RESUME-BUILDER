@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link,useParams } from "react-router-dom";
 import {dummyResumeData} from '../assets/assets';
 import { ArrowLeftIcon, Briefcase, ChevronLeft,ChevronRight, FileText, FolderIcon, GraduationCap, Sparkles, User } from "lucide-react";
+import PersonalInfoForm from "../components/PersonalInfoForm";
 
 const ResumeBuilder = () => {
 
@@ -34,7 +35,7 @@ const ResumeBuilder = () => {
     }
 
     const[activeSectionIndex,setActiveSectionIndex]=useState(0);
-    const[removeBackground,setRremoveBackground]=useState(false);
+    const[removeBackground,setRemoveBackground]=useState(false);
 
     const sections=[
         {id:"personal",
@@ -93,7 +94,7 @@ const ResumeBuilder = () => {
                             from-green-500 to-green-600 border-none transition-all duration-2000"
                             style={{width:`${activeSectionIndex * 100 /(sections.length-1)}
                             %`}}/>
-
+                           {/* Section navigation */}
                             <div className="flex justify-between items-center mb-6 border-b
                             border-gray-300 py-1">
                                 <div></div>
@@ -110,8 +111,21 @@ const ResumeBuilder = () => {
                                         text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all  ${activeSectionIndex === sections.length-1 && 'opacity-50'}`} disabled={activeSectionIndex===sections.length-1}>
                                            Next<ChevronRight className="size-4"/>
                                         </button>
+
+                                       
                                 </div>
                                 
+                            </div>
+                          {/*form content */}
+                            <div className="space-y-6">
+                                {activeSection.id === 'personal' && (
+                                    <PersonalInfoForm data={resumeData.personal_info} onChange={(data)=>
+                                        setResumeData(prev=>({...prev,personal_info:data})) 
+                                    } removeBackground={removeBackground}  
+                                    setRemoveBackground={setRemoveBackground}/>
+                                )}
+
+
                             </div>
 
                         </div>
