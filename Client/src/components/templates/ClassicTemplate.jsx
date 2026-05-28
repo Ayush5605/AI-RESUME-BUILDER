@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, Linkedin, Globe } from "lucide-react";
+import { Mail, Phone, MapPin,  Globe } from "lucide-react";
 
 const ClassicTemplate = ({ data, accentColor }) => {
     const formatDate = (dateStr) => {
@@ -15,7 +15,7 @@ const ClassicTemplate = ({ data, accentColor }) => {
             {/* Header */}
             <header className="text-center mb-8 pb-6 border-b-2" style={{ borderColor: accentColor }}>
                 <h1 className="text-3xl font-bold mb-2" style={{ color: accentColor }}>
-                    {data.personal_info?.full_name || "Your Name"}
+                    {data.personal_info?.fullName || "Your Name"}
                 </h1>
 
                 <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-600">
