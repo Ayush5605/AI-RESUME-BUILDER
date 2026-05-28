@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin,  Globe } from "lucide-react";
+import { Mail, Phone, MapPin,  Globe, Link } from "lucide-react";
 
 const ModernTemplate = ({ data, accentColor }) => {
 	const formatDate = (dateStr) => {
@@ -39,8 +39,8 @@ const ModernTemplate = ({ data, accentColor }) => {
 					)}
 					{data.personal_info?.linkedin && (
 						<a target="_blank" href={data.personal_info?.linkedin} className="flex items-center gap-2">
-							<Linkedin className="size-4" />
-							<span className="break-all text-xs">{data.personal_info.linkedin.split("https://www.")[1] ? data.personal_info.linkedin.split("https://www.")[1] : data.personal_info.linkedin}</span>
+							<Link className="size-4" />
+							<span className="break-all text-xs">{data.personal_info.linkedIn.split("https://www.")[1] ? data.personal_info.linkedIn.split("https://www.")[1] : data.personal_info.linkedIn}</span>
 						</a>
 					)}
 					{data.personal_info?.website && (

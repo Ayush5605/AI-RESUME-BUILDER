@@ -5,6 +5,8 @@ import {
   Globe,
   MapPin,
   BriefcaseBusiness,
+  Computer,
+  Link,
 } from "lucide-react";
 
 import React from "react";
@@ -65,6 +67,20 @@ const PersonalInfoForm = ({
       icon: Globe,
       placeholder: "Enter your personal website URL",
     },
+    {
+      key: "Github",
+      label: "GitHub Profile",
+      icon: Computer,
+      placeholder: "Enter your GitHub profile URL",
+    },
+    {
+      key: "LinkedIn",
+      label: "LinkedIn Profile",
+      icon: Link,
+      placeholder: "Enter your LinkedIn profile URL",
+    }
+
+
   ];
 
   return (
