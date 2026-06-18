@@ -4,6 +4,7 @@ import {dummyResumeData} from '../assets/assets';
 import { ArrowLeftIcon, Briefcase, ChevronLeft,ChevronRight, FileText, FolderIcon, GraduationCap, Sparkles, User } from "lucide-react";
 import PersonalInfoForm from "../components/PersonalInfoForm";
 import ResumePreview from "../components/ResumePreview";
+import TemplateSelector from "../components/home/TemplateSelector";
 
 const ResumeBuilder = () => {
 
@@ -98,7 +99,16 @@ const ResumeBuilder = () => {
                            {/* Section navigation */}
                             <div className="flex justify-between items-center mb-6 border-b
                             border-gray-300 py-1">
-                                <div></div>
+                            
+                            
+                            <div className="flex justify-between items-center mb-6 border-b
+                             border-gray-300 py-1">
+
+                            <TemplateSelector selectedTemplate={resumeData.template} onChnage=
+                            {(template)=>setResumeData(prev=>({...prev,template}))}/>
+                            
+                            </div>
+                                
                                 <div className="flex items-center">
                                     {activeSectionIndex!==0 && (
                                         <button onClick={()=> setActiveSectionIndex((prevIndex)=>Math.max(prevIndex-1,0))} className="flex items-center gap-1 p-3 rounded-lg
@@ -135,11 +145,7 @@ const ResumeBuilder = () => {
 
                   {/* right panel */}
                     <div className="lg:col-span-7 max-lg:mt-6">
-                        <div>
-
-                            {/* buttons */}
-                            
-                        </div>
+                        
 
                         <ResumePreview data={resumeData} template={resumeData.template}
                         accentColor={resumeData.accent_color}/>

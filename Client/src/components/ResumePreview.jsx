@@ -16,7 +16,7 @@ const ResumePreview = ({
 
     switch (template) {
 
-      case "modern":
+      case "Modern":
         return (
           <ModernTemplate
             data={data}
@@ -24,7 +24,7 @@ const ResumePreview = ({
           />
         );
 
-      case "classic":
+      case "Classic":
         return (
           <ClassicTemplate
             data={data}
@@ -32,7 +32,7 @@ const ResumePreview = ({
           />
         );
 
-      case "minimal":
+      case "Minimal":
         return (
           <MinimalTemplate
             data={data}
@@ -40,7 +40,7 @@ const ResumePreview = ({
           />
         );
 
-      case "minimal-image":
+      case "Minimal-image":
         return (
           <MinimalImageTemplate
             data={data}
