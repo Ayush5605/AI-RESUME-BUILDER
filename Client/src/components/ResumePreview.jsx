@@ -13,10 +13,8 @@ const ResumePreview = ({
 }) => {
 
   const renderTemplate = () => {
-
-    switch (template) {
-
-      case "Modern":
+    switch (template?.toLowerCase()) {
+      case "modern":
         return (
           <ModernTemplate
             data={data}
@@ -24,7 +22,7 @@ const ResumePreview = ({
           />
         );
 
-      case "Classic":
+      case "classic":
         return (
           <ClassicTemplate
             data={data}
@@ -32,7 +30,7 @@ const ResumePreview = ({
           />
         );
 
-      case "Minimal":
+      case "minimal":
         return (
           <MinimalTemplate
             data={data}
@@ -40,7 +38,7 @@ const ResumePreview = ({
           />
         );
 
-      case "Minimal-image":
+      case "minimal-image":
         return (
           <MinimalImageTemplate
             data={data}
@@ -68,7 +66,7 @@ const ResumePreview = ({
         {renderTemplate()}
       </div>
 
-      <style jsx>{`
+      <style >{`
         @page {
           size: letter;
           margin: 0;
