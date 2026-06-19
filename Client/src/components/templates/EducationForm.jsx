@@ -1,5 +1,5 @@
 import React from "react";
-import { Briefcase, Plus, Sparkles, Trash2 } from "lucide-react";
+import { Briefcase, GraduationCapIcon, Plus, Sparkles, Trash2 } from "lucide-react";
 
 
 const EducationForm=({data,onChange})=>{
@@ -60,12 +60,12 @@ const EducationForm=({data,onChange})=>{
       {/* Empty State */}
       {data.length === 0 ? (
         <div className="text-center py-8 text-gray-500">
-          <Briefcase className="w-12 h-12 mx-auto mb-3 text-gray-300" />
+          <GraduationCapIcon className="w-12 h-12 mx-auto mb-3 text-gray-300" />
 
           <p>No education added yet !</p>
 
           <p className="text-sm">
-            Add Education
+            Click "Add Education" to add education
           </p>
         </div>
       ) : (
@@ -119,6 +119,37 @@ const EducationForm=({data,onChange})=>{
                   }
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg"
                 />
+
+
+                <input
+                  type="text"
+                  placeholder="field"
+                  value={education.field}
+                  onChange={(e) =>
+                    updateEducation(
+                      index,
+                      "field",
+                      e.target.value
+                    )
+                  }
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                />
+
+                <input
+                  type="number"
+                  min="0"
+                  max="10"
+                  placeholder="CGPA"
+                  value={education.gpa}
+                  onChange={(e) =>
+                    updateEducation(
+                      index,
+                      "cgpa",
+                      e.target.value
+                    )
+                  }
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                />
               </div>
 
               {/* Dates */}
@@ -142,7 +173,7 @@ const EducationForm=({data,onChange})=>{
              
               
 
-              {/* Description */}
+            
              
             </div>
           ))}
