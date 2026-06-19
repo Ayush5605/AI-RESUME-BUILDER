@@ -20,6 +20,7 @@ import TemplateSelector from "../components/home/TemplateSelector";
 import ColorPicker from "../components/ColorPicker";
 import ProfessionalSummaryForm from "../components/ProfessionalSummaryForm";
 import ExperienceForm from "../components/templates/ExperienceForm";
+import EducationForm from "../components/templates/EducationForm";
 
 const ResumeBuilder = () => {
   const { resumeId } = useParams();
@@ -248,6 +249,13 @@ const ResumeBuilder = () => {
                   activeSection.id==='experience' && (
                     <ExperienceForm data={resumeData.experience}
                     onChange={(data)=>setResumeData(prev=>({...prev,experience:data}))} />
+                  )
+                }
+
+                 {
+                  activeSection.id==='education' && (
+                    <EducationForm data={resumeData.education}
+                    onChange={(data)=>setResumeData(prev=>({...prev,education:data}))} />
                   )
                 }
 
