@@ -144,7 +144,7 @@ const EducationForm=({data,onChange})=>{
                   onChange={(e) =>
                     updateEducation(
                       index,
-                      "cgpa",
+                      "gpa",
                       e.target.value
                     )
                   }
