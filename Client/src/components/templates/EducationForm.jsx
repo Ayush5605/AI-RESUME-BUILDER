@@ -78,7 +78,7 @@ const EducationForm=({data,onChange})=>{
               {/* Title */}
               <div className="flex justify-between items-center">
                 <h4 className="font-semibold text-gray-800">
-                  Experience #{index + 1}
+                  Education #{index + 1}
                 </h4>
 
                 <button

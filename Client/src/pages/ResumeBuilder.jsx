@@ -7,9 +7,14 @@ import {
   Briefcase,
   ChevronLeft,
   ChevronRight,
+  DownloadIcon,
+  EyeIcon,
+  EyeOffIcon,
   FileText,
   FolderIcon,
   GraduationCap,
+  Share2Icon,
+  ShareIcon,
   Sparkles,
   User,
 } from "lucide-react";
@@ -30,28 +35,18 @@ const ResumeBuilder = () => {
   const [resumeData, setResumeData] = useState({
     _id: "",
     title: "Resume",
-
     personal_info: {},
-
     professional_summary: "",
-
     experience: [],
-
     education: [],
-
     projects: [],
-
     skills: [],
-
     template: "classic",
-
     accent_color: "#3B82F6",
-
     public: false,
   });
 
   const [activeSectionIndex, setActiveSectionIndex] = useState(0);
-
   const [removeBackground, setRemoveBackground] = useState(false);
 
   const sections = [
@@ -60,31 +55,26 @@ const ResumeBuilder = () => {
       name: "Personal Info",
       icon: User,
     },
-
     {
       id: "summary",
       name: "Summary",
       icon: FileText,
     },
-
     {
       id: "experience",
       name: "Experience",
       icon: Briefcase,
     },
-
     {
       id: "education",
       name: "Education",
       icon: GraduationCap,
     },
-
     {
       id: "projects",
       name: "Projects",
       icon: FolderIcon,
     },
-
     {
       id: "skills",
       name: "Skills",
@@ -96,37 +86,54 @@ const ResumeBuilder = () => {
 
   const loadExistingResume = async () => {
     const resume = dummyResumeData.find(
-      (resume) => resume._id == resumeId
+      (resume) => resume._id === resumeId
     );
 
     if (resume) {
       setResumeData(resume);
-
       document.title = resume.title;
     }
   };
 
   useEffect(() => {
     loadExistingResume();
-  }, []);
+  }, [resumeId]);
+
+  const changeResumeVisibility=async()=>{
+    setResumeData({...resumeData,public:!resumeData.public})
+  }
+
+  const shareResume=()=>{
+    const frontendUrl=window.location.href.split('/app/')[0];
+    const resumeUrl=frontendUrl+'/view/'+resumeId;
+
+    if(navigator.share){
+      navigator.share({url:resumeUrl,text:"My Resume"})
+    }else{
+      alert(`Share not supported on this borwser.`);
+    }
+  }
+
+  const downloadResume=()=>{
+    window.print();
+  }
 
   return (
     <div>
       {/* Back Button */}
-
       <div className="max-w-7xl mx-auto px-4 py-6">
         <Link
           to="/app"
           className="inline-flex gap-2 items-center text-slate-500 hover:text-slate-700 transition-all"
         >
           <ArrowLeftIcon className="size-4" />
-
           Dashboard
         </Link>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 pb-8">
         <div className="grid lg:grid-cols-12 gap-8">
+
           {/* LEFT PANEL */}
 
           <div className="relative lg:col-span-5 rounded-lg overflow-hidden">
@@ -197,7 +204,6 @@ const ResumeBuilder = () => {
                       className="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100"
                     >
                       <ChevronLeft className="size-4" />
-
                       Previous
                     </button>
                   )}
@@ -208,9 +214,7 @@ const ResumeBuilder = () => {
                         Math.min(prev + 1, sections.length - 1)
                       )
                     }
-                    disabled={
-                      activeSectionIndex === sections.length - 1
-                    }
+                    disabled={activeSectionIndex === sections.length - 1}
                     className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 ${
                       activeSectionIndex === sections.length - 1
                         ? "opacity-50 cursor-not-allowed"
@@ -218,7 +222,6 @@ const ResumeBuilder = () => {
                     }`}
                   >
                     Next
-
                     <ChevronRight className="size-4" />
                   </button>
                 </div>
@@ -241,52 +244,123 @@ const ResumeBuilder = () => {
                     setRemoveBackground={setRemoveBackground}
                   />
                 )}
-                {
-                    activeSection.id==='summary' && (
-                        <ProfessionalSummaryForm data={resumeData.professional_summary}
-                        onChange={(data)=>setResumeData(prev=>({...prev,professional_summary:data}))} setResumeData={setResumeData}/>
 
-                    )}
-                {
-                  activeSection.id==='experience' && (
-                    <ExperienceForm data={resumeData.experience}
-                    onChange={(data)=>setResumeData(prev=>({...prev,experience:data}))} />
-                  )
-                }
+                {activeSection.id === "summary" && (
+                  <ProfessionalSummaryForm
+                    data={resumeData.professional_summary}
+                    onChange={(data) =>
+                      setResumeData((prev) => ({
+                        ...prev,
+                        professional_summary: data,
+                      }))
+                    }
+                    setResumeData={setResumeData}
+                  />
+                )}
 
-                 {
-                  activeSection.id==='education' && (
-                    <EducationForm data={resumeData.education}
-                    onChange={(data)=>setResumeData(prev=>({...prev,education:data}))} />
-                  )
-                }
+                {activeSection.id === "experience" && (
+                  <ExperienceForm
+                    data={resumeData.experience}
+                    onChange={(data) =>
+                      setResumeData((prev) => ({
+                        ...prev,
+                        experience: data,
+                      }))
+                    }
+                  />
+                )}
 
-                {
-                  activeSection.id==='projects' && (
-                    <ProjectForm data={resumeData.projects}
-                    onChange={(data)=>setResumeData(prev=>({...prev,projects:data}))} />
-                  )
-                }
+                {activeSection.id === "education" && (
+                  <EducationForm
+                    data={resumeData.education}
+                    onChange={(data) =>
+                      setResumeData((prev) => ({
+                        ...prev,
+                        education: data,
+                      }))
+                    }
+                  />
+                )}
 
-                {
-                  activeSection.id==='skills' && (
-                    <SkillsForm data={resumeData.skills}
-                    onChange={(data)=>setResumeData(prev=>({...prev,skills:data}))} />
-                  )
-                }
+                {activeSection.id === "projects" && (
+                  <ProjectForm
+                    data={resumeData.projects}
+                    onChange={(data) =>
+                      setResumeData((prev) => ({
+                        ...prev,
+                        projects: data,
+                      }))
+                    }
+                  />
+                )}
 
+                {activeSection.id === "skills" && (
+                  <SkillsForm
+                    data={resumeData.skills}
+                    onChange={(data) =>
+                      setResumeData((prev) => ({
+                        ...prev,
+                        skills: data,
+                      }))
+                    }
+                  />
+                )}
               </div>
-              <button className="bg-gradient-to-br from-green-100 to-green-200 ring-green-300
-              text-green-600 ring hover:ring-green-400
-              transition-all rounded-md px-6 py-2 mt-6 text-sm">
+
+              <button
+                className="bg-gradient-to-br from-green-100 to-green-200
+                ring-green-300 text-green-600 ring hover:ring-green-400
+                transition-all rounded-md px-6 py-2 mt-6 text-sm"
+              >
                 Save Changes
               </button>
+
             </div>
           </div>
 
           {/* RIGHT PANEL */}
 
           <div className="lg:col-span-7 max-lg:mt-6">
+            <div className="relative w-full">
+
+              <div className="absolute bottom-3 left-0 right-0 flex items-center justify-end gap-2">
+
+                {resumeData.public && (
+                  <button
+                  onClick={shareResume}
+                    className="flex items-center p-2 px-4 gap-2 text-xs
+                    bg-gradient-to-br from-blue-100 to-blue-200
+                    text-blue-600 rounded-lg ring-blue-300 hover:ring
+                    transition-colors"
+                  >
+                    <Share2Icon className="size-4" />Share
+                  </button>
+                )}
+
+                <button onClick={changeResumeVisibility}
+                className="flex items-center gap-2 px-4 py-2 text-xs">
+                  {resumeData.public ? (
+                    <EyeIcon className="size-4" />
+                  ) : (
+                    <EyeOffIcon className="size-4" />
+                  )}
+
+                  {resumeData.public ? "Public" : "Private"}
+                </button>
+
+                <button
+                onClick={downloadResume}
+                  className="flex items-center gap-2 px-6 py-2 text-xs
+                  bg-gradient-to-br from-green-100 to-green-200
+                  text-green-600 rounded-lg ring-green-300
+                  hover:ring transition-colors"
+                >
+                  <DownloadIcon className="size-4" />
+                  Download
+                </button>
+
+              </div>
+            </div>
 
             <ResumePreview
               data={resumeData}
