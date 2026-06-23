@@ -1,9 +1,9 @@
-import { JsonWebTokenError } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import User from "../Model/User.js";
 import bcrypt from "bcryptjs";
 
 const generateToken=(userId)=>{
-    const token=JsonWebTokenError.toString({userId},process.env.JWT_SECRET,{expiresIn:"7d"});
+    const token=jwt.sign({userId},process.env.JWT_SECRET,{expiresIn:"7d"});
     return token;
 }
 
@@ -15,15 +15,15 @@ const generateToken=(userId)=>{
 export const registerUser=async(req,res)=>{
 
     try{
-        const{name,email,user}=req.body;
+        const{name,email,password}=req.body;
 
         if(!name || !email || !password){
             return res.status(400).json({message:"Missing the required fields"});
         }
 
-        const user=await User.findOne({email})
+        const existingUser=await User.findOne({email})
 
-        if(user){
+        if(existingUser){
             return res.status(400).json({message:"User already exists"});
         }
 
