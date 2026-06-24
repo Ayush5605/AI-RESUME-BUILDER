@@ -3,6 +3,7 @@ import cors from "cors";
 import "dotenv/config";
 import connectDB from "./Config/db.js";
 import userRouter from "./View/userRoutes.js";
+import resumeRouter from "./View/resumeRoutes.js";
 
 const app=express();
 app.use(express.json());
@@ -19,6 +20,7 @@ app.get('/',(req,res)=>{
 });
 
 app.use('/api/users',userRouter);
+
 
 app.listen(PORT,()=>{
     console.log(`Server is running on ${PORT}`);
