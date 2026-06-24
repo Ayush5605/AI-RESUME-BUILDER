@@ -20,6 +20,7 @@ app.get('/',(req,res)=>{
 });
 
 app.use('/api/users',userRouter);
+app.use('/api/resumes',resumeRouter);
 
 
 app.listen(PORT,()=>{
