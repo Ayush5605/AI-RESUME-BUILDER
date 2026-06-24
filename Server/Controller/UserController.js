@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import User from "../Model/User.js";
 import bcrypt from "bcryptjs";
+import User from "../Model/User.js";
 
 const generateToken=(userId)=>{
     const token=jwt.sign({userId},process.env.JWT_SECRET,{expiresIn:"7d"});
@@ -78,6 +79,35 @@ export const loginUser=async(req,res)=>{
         existingUser.password=undefined;
 
         return res.status(200).json({message:"Login successful",token,existingUser});
+
+        
+
+    }catch(error){
+        return res.status(400).json({message:error.message})
+
+    }
+
+}
+
+//controller to get user by id
+//GET : /api/users/data
+
+export const getUserById=async(req,res)=>{
+
+    try{
+        const userId=req.userId;
+
+        const user=await User.findById(userId);
+
+        if(!user){
+            return res.status(404).json({message:"User not found !"});
+
+        }
+
+        user.password=undefined;
+
+       
+        return res.status(200).json({user});
 
         
 
