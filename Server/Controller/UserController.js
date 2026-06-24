@@ -47,3 +47,43 @@ export const registerUser=async(req,res)=>{
     }
 
 }
+
+
+//POST: /api/users/login
+
+
+export const loginUser=async(req,res)=>{
+
+    try{
+        const{email,password}=req.body;
+
+        if( !email || !password){
+            return res.status(400).json({message:"Missing the required fields"});
+        }
+
+        const existingUser=await User.findOne({email})
+
+        if(!existingUser){
+            return res.status(400).json({message:"User does not exist"});
+        }
+
+        if(!existingUser.comparePassword(password)){
+            return res.status(400).json({message:"Invalid email or password"});
+        }
+
+        
+
+        const token=generateToken(existingUser._id);
+
+        existingUser.password=undefined;
+
+        return res.status(200).json({message:"Login successful",token,existingUser});
+
+        
+
+    }catch(error){
+        return res.status(400).json({message:error.message})
+
+    }
+
+}
