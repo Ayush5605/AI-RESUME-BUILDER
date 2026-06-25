@@ -43,10 +43,10 @@ const Hero = () => {
                             <img src={logo} alt="logo" className="h-11 w-auto"></img>
                         </a>
                         <div id="menu" className={`${mobileOpen ? 'max-md:w-full' : 'max-md:w-0'} max-md:fixed max-md:top-0 max-md:z-10 max-md:left-0 max-md:transition-all max-md:duration-300 max-md:overflow-hidden max-md:h-screen max-md:bg-black/50 max-md:backdrop-blur max-md:flex-col max-md:justify-center flex items-center gap-8 text-sm`}>
-                            <a href="#" onClick={() => setMobileOpen(false)} className="text-green-500 hover:text-green-700">Home</a>
-                            <a href="#" onClick={() => setMobileOpen(false)} className="text-green-500 hover:text-green-700">Features</a>
-                            <a href="#" onClick={() => setMobileOpen(false)} className="text-green-500 hover:text-green-700">Testimonials</a>
-                            <a href="#" onClick={() => setMobileOpen(false)} className="text-green-500 hover:text-green-700 mr-6">Contact</a>
+                            <a href="#home" onClick={() => setMobileOpen(false)} className="text-green-500 hover:text-green-700">Home</a>
+                            <a href="#features" onClick={() => setMobileOpen(false)} className="text-green-500 hover:text-green-700">Features</a>
+                            <a href="#testimonials" onClick={() => setMobileOpen(false)} className="text-green-500 hover:text-green-700">Testimonials</a>
+                            <a href="#contact" onClick={() => setMobileOpen(false)} className="text-green-500 hover:text-green-700 mr-6">Contact</a>
 
                             <button id="close-menu" onClick={() => setMobileOpen(false)} className="md:hidden bg-gray-900 hover:bg-gray-800 text-white p-2 rounded-md aspect-square font-medium transition">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

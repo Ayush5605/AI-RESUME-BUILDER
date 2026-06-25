@@ -1,24 +1,34 @@
 import React from "react";
 import Banner from "../components/home/Banner";
 import Hero from "../components/home/Hero";
-import Features from "../components/home/features";
+import Features from "../components/home/Features";
 import Testimonial from "../components/home/Testimonial";
 import CallToAction from "../components/home/CallToAction";
 import Footer from "../components/home/Footer";
 
 const Home = () => {
-    return (
-        <div>
-            <Banner />
-            <Hero />
-            <Features/>
-            <Testimonial/>
-            <CallToAction/>
-            <Footer/>
+  return (
+    <div className="scroll-smooth">
+      <Banner />
 
+      <section id="home">
+        <Hero />
+      </section>
 
-        </div>
-    )
-}
+      <section id="features">
+        <Features />
+      </section>
+
+      <section id="testimonials">
+        <Testimonial />
+      </section>
+
+      <section id="contact">
+        <CallToAction />
+        <Footer />
+      </section>
+    </div>
+  );
+};
 
 export default Home;
