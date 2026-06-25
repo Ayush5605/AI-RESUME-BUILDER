@@ -4,6 +4,7 @@ import "dotenv/config";
 import connectDB from "./Config/db.js";
 import userRouter from "./View/userRoutes.js";
 import resumeRouter from "./View/resumeRoutes.js";
+import aiRouter from "./View/AIRoutes.js";
 
 const app=express();
 app.use(express.json());
@@ -21,6 +22,7 @@ app.get('/',(req,res)=>{
 
 app.use('/api/users',userRouter);
 app.use('/api/resumes',resumeRouter);
+app.use('/api/ai',aiRouter);
 
 
 app.listen(PORT,()=>{
