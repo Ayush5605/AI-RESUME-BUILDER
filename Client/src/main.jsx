@@ -6,13 +6,14 @@ import { BrowserRouter } from 'react-router-dom'
 import {Provider} from 'react-redux'
 import { store } from './app/store.js'
 import AuthProvider from './AuthProvider.jsx'
+import { Toaster } from 'sonner'
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
   <Provider store={store}>
     <AuthProvider>
       <App />
-
+       <Toaster richColors position='top-right'/>
     </AuthProvider>
     
 

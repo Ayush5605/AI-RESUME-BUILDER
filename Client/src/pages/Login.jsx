@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import api from "../configs/api.js";
 import { login, setLoading } from "../app/features/authSlice.js";
+import {toast} from "sonner";
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -54,6 +55,7 @@ const Login = () => {
 
             localStorage.setItem("token", data.token);
             localStorage.setItem("user", JSON.stringify(data.user));
+            toast.success(data.message);
 
             dispatch(
                 login({
@@ -64,7 +66,7 @@ const Login = () => {
 
             navigate("/app");
         } catch (error) {
-            alert(
+            toast(
                 error.response?.data?.message ||
                     "Something went wrong."
             );
