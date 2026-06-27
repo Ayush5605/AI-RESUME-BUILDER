@@ -133,14 +133,22 @@ export const getPublicResumeById=async(req,res)=>{
 
 export const updateResume = async (req, res) => {
   try {
+
+    console.log("req.body:", req.body);
+    console.log("req.file:", req.file);
     const userId = req.userId;
 
     const { resumeId, resumeData, removeBackground } = req.body;
+     console.log("resumeId:", resumeId);
+    console.log("resumeData:", resumeData);
+    console.log("typeof resumeData:", typeof resumeData);
+
 
     const image = req.file;
 
     // Convert JSON string to object
-    const resumeDataCopy = JSON.parse(resumeData);
+    const resumeDataCopy = resumeData;
+    console.log("parsed:", resumeDataCopy);
 
     // Upload image if provided
     if (image) {
