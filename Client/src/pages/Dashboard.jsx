@@ -11,6 +11,10 @@ import {
 import React, { useEffect, useState } from "react";
 import { dummyResumeData } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { toast } from "sonner";
+import api from "../configs/api.js";
+import pdfToText from 'react-pdftotext';
 
 const Dashboard = () => {
   const colors = [
@@ -21,12 +25,15 @@ const Dashboard = () => {
     "#16a34a",
   ];
 
+  const{user,token}=useSelector((state)=>state.auth);
+
   const [allResumes, setAllResumes] = useState([]);
   const [showCreateResume, setShowCreateResume] = useState(false);
   const [showUploadResume, setShowUploadResume] = useState(false);
   const [title, setTitle] = useState("");
   const [resume, setResume] = useState(null);
   const [editResumeId, setEditResumeId] = useState("");
+  const [isLoading,setIsLoading]=useState(false);
 
   const navigate = useNavigate();
 
@@ -35,22 +42,55 @@ const Dashboard = () => {
   };
 
   const createResume = async (e) => {
-    e.preventDefault();
+    try{
+      e.preventDefault();
+      const {data}=await api.post('/resumes/create',{title},{headers:{
+        Authorization:token
+      }})
 
-    setShowCreateResume(false);
+      setAllResumes([...allResumes,data.resume])
+      setTitle('');
+      setShowCreateResume(false)
+      navigate(`/app/builder/${data.resume._id}`);
 
-    console.log(title);
+    }catch(e){
+      toast.error(e?.response?.data?.message || e.message);
 
-    navigate(`/app/builder/resume123`);
+    }
+
+
+
   };
 
   const uploadResume=async(e)=>{
     e.preventDefault();
 
-    setShowUploadResume(false);
+    setIsLoading(true);
 
-    console.log(title);
-    navigate(`/app/builder.resume123`);
+    try{
+      const resumeText=await pdfToText(resume);
+      const {data}=await api.post('/ai/upload-resume',{title,resumeText},{headers:{
+        Authorization:token
+      }})
+
+      setTitle('');
+      setResume(null);
+      setShowUploadResume(false);
+      navigate(`/app/builder/${data.resumeId}`)
+
+
+    }catch(e){
+            toast.error(e?.response?.data?.message || e.message);
+
+
+
+    }
+    setIsLoading(false);
+
+    
+
+    
+    
   }
 
   const editTitle=async(e)=>{

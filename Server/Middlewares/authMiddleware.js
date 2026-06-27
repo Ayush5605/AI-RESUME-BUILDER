@@ -1,25 +1,24 @@
-import jwt from 'jsonwebtoken';
+import jwt from "jsonwebtoken";
 
+const protect = async (req, res, next) => {
 
-const protect=async(req,res,next)=>{
+    const authHeader = req.headers.authorization;
 
-    const token=req.header.authorization;
-
-    if(!token){
-        return res.status(401).json({message:"Unauthorized"});
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+        return res.status(401).json({ message: "Unauthorized" });
     }
 
-    try{
+    const token = authHeader.split(" ")[1];
 
-        const decoded=jwt.verify(token,process.env.JWT_SECRET);
-        req.userId=decoded.userId;
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+        req.userId = decoded.userId;
+
         next();
-
-    }catch(error){
-             return res.status(401).json({message:"Unauthorized"});
-
+    } catch (error) {
+        return res.status(401).json({ message: "Invalid or expired token" });
     }
-
-}
+};
 
 export default protect;
