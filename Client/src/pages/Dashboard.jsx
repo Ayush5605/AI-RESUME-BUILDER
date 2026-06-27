@@ -1,5 +1,6 @@
 import {
   FilePenLineIcon,
+  LoaderCircleIcon,
   PencilIcon,
   PlusIcon,
   TrashIcon,
@@ -91,7 +92,7 @@ const Dashboard = () => {
 
 
     }catch(e){
-            toast.error(e?.response?.data?.message || e.message);
+      toast.error(e?.response?.data?.message || e.message);
 
 
 
@@ -105,14 +106,45 @@ const Dashboard = () => {
   }
 
   const editTitle=async(e)=>{
-    e.preventDefault();
+    try{
+      e.preventDefault();
+      const {data}=await api.put(`/resumes/update`,{resumeId:editResumeId,resumeData:{title}},{headers:{
+        Authorization:token}})
+        setAllResumes(allResumes.map(resume=>resume._id === editResumeId ? {...resume,
+          title}:resume))
+          setTitle('')
+          setEditResumeId('')
+          toast.success(data.message)
+
+          
+        
+
+    }catch(e){
+        toast.error(e?.response?.data?.message || e.message);
+
+
+    }
   }
 
   const deleteResume=async(resumeId)=>{
-    const confirm=window.confirm('Are you sure you want to delete the resume?');
+
+    try{
+       const confirm=window.confirm('Are you sure you want to delete the resume?');
     if(confirm){
-      setAllResumes(prev=>prev.filter(resume=>resume._id!==resumeId))
+      const {data}=await api.delete(`/resumes/delete/${resumeId}`,{headers:{
+        Authorization:token}})
+
+        setAllResumes(allResumes.filter(resume=>resume._id !== resumeId))
+        toast.success(data.message);
     }
+
+    }catch(e){
+
+      toast.error(e?.response?.data?.message || e.message);
+
+
+    }
+   
   }
 
   useEffect(() => {
@@ -352,7 +384,9 @@ const Dashboard = () => {
               className="w-full py-2 bg-green-600 text-white
               rounded hover:bg-green-700 transition-colors"
             >
-              Upload Resume
+              {isLoading && <LoaderCircleIcon className="animate-spin size-4 text-white"/>}
+              {isLoading ? 'Uploading...' :'Upload resume'}
+              
             </button>
 
             <XIcon

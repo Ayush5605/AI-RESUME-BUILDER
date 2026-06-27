@@ -140,7 +140,7 @@ export const getPublicResumeById=async(req,res)=>{
         
 
 
-        let resumeDataCopy=JSON.parse(resumeData);
+        let resumeDataCopy=JSON.parse(JSON.stringify(resumeData));
 
         if(image){
 
@@ -158,7 +158,7 @@ export const getPublicResumeById=async(req,res)=>{
            resumeDataCopy.personal_info.image=response.url;
         }
 
-        const updatedResume=await resume.findByIdAndUpdate({userId,_id:resumeId},resumeDataCopy,{new:true})
+        const updatedResume=await Resume.findOneAndUpdate({userId,_id:resumeId},resumeDataCopy,{new:true})
 
         
 
