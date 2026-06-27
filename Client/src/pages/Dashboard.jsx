@@ -38,7 +38,18 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   const loadAllResumes = async () => {
-    setAllResumes(dummyResumeData);
+    try{
+
+      const {data}=await api.get('/users/resumes',{headers:{
+        Authorization:token
+      }})
+      setAllResumes(data.resumes)
+
+    }catch(e){
+            toast.error(e?.response?.data?.message || e.message);
+
+
+    }
   };
 
   const createResume = async (e) => {
