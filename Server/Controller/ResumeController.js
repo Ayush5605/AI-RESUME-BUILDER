@@ -129,50 +129,67 @@ export const getPublicResumeById=async(req,res)=>{
 
 
     //put :/api/resumes/update
-    export const updateResume=async(req,res)=>{
-
-    try{
-        const userId=req.userId;
-        const{resumeId,resumeData,removeBackground}=req.body;
-
-        const image=req.file;
-
-        
 
 
-        let resumeDataCopy=JSON.parse(JSON.stringify(resumeData));
+export const updateResume = async (req, res) => {
+  try {
+    const userId = req.userId;
 
-        if(image){
+    const { resumeId, resumeData, removeBackground } = req.body;
 
-            const mageBufferData=fs.createReadStream(image.path)
+    const image = req.file;
 
-            const response = await imageKit.files.upload({
-           file: imageBufferData,
-           fileName: 'resume.jpg',
-           folder:'user-resumes',
-           transformation:{
-            pre:'w-300,h-300,fo-face,z-0.75'+(removeBackground ? ',e-bgremove': '')
-           }
-           });
+    // Convert JSON string to object
+    const resumeDataCopy = JSON.parse(resumeData);
 
-           resumeDataCopy.personal_info.image=response.url;
-        }
+    // Upload image if provided
+    if (image) {
+      const imageBufferData = fs.createReadStream(image.path);
 
-        const updatedResume=await Resume.findOneAndUpdate({userId,_id:resumeId},resumeDataCopy,{new:true})
+      const response = await imageKit.upload({
+        file: imageBufferData,
+        fileName: "resume.jpg",
+        folder: "/user-resumes",
+        transformation: {
+          pre:
+            "w-300,h-300,fo-face,z-0.75" +
+            (removeBackground ? ",e-bgremove" : ""),
+        },
+      });
 
-        
+      resumeDataCopy.personal_info.image = response.url;
 
-        return res.status(200).json({message:"updated successfully",updateResume});
-
-    }catch(error){
-                res.status(400).json({message:error.message});
-
-
+      // Delete temporary uploaded file
+      fs.unlinkSync(image.path);
     }
-    
-    
-}
 
+    // Update resume
+    const updatedResume = await Resume.findOneAndUpdate(
+      {
+        _id: resumeId,
+        userId,
+      },
+      resumeDataCopy,
+      {
+        new: true,
+      }
+    );
 
+    if (!updatedResume) {
+      return res.status(404).json({
+        message: "Resume not found",
+      });
+    }
 
+    return res.status(200).json({
+      message: "Resume updated successfully",
+      resume: updatedResume,
+    });
+  } catch (error) {
+    console.error(error);
 
+    return res.status(400).json({
+      message: error.message,
+    });
+  }
+};
