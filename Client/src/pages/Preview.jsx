@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { dummyResumeData } from "../assets/assets";
 import { ArrowLeftIcon, Loader } from "lucide-react";
 import ResumePreview from "../components/ResumePreview";
+import api from "../configs/api";
 
 const Preview = () => {
 
@@ -13,9 +14,20 @@ const Preview = () => {
     const [resumeData,setResumeData]=useState(null);
 
     const loadResume=async()=>{
-        setResumeData(dummyResumeData.find(resume=>resume._id===
-            resumeId || null));
+        try{
+            console.log("resumeId:", resumeId);
+
+            const response=await api.get(`/resumes/public/${resumeId}`);
+            
+            setResumeData(response.data.resume);
+
+        }catch(e){
+            console.log(e.message);
+
+        }finally{
             setIsLoading(false);
+        }
+        
     }
 
     useEffect(()=>{

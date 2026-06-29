@@ -120,13 +120,7 @@ const ProjectForm = ({ data = [], onChange }) => {
                     Project Description
                   </label>
 
-                  <button
-                    type="button"
-                    className="flex items-center gap-1 px-2 py-1 text-xs bg-purple-100 text-purple-700 rounded hover:bg-purple-200"
-                  >
-                    <Sparkles className="w-3 h-3" />
-                    Enhance with AI
-                  </button>
+                  
                 </div>
 
                 <textarea

@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import User from "../Model/User.js";
 import bcrypt from "bcryptjs";
 import imageKit from "../Config/Imagekit.js";
-import ImageKit from "@imagekit/nodejs";
+
 import fs from "fs";
 
 import Resume from "../Model/Resume.js";
@@ -105,8 +105,10 @@ export const getPublicResumeById=async(req,res)=>{
     try{
         
         const{resumeId}=req.params;
+         console.log("Requested Resume ID:", resumeId);
 
-        const resume=await Resume.findOne({public:true,_id:resumeId})
+        const resume=await Resume.findOne({public:true,_id:resumeId});
+        console.log("Resume Found:", resume);
 
         if(!resume){
             return res.status(404).json({message:"Resume Not Found!"})
@@ -147,7 +149,13 @@ export const updateResume = async (req, res) => {
     const image = req.file;
 
     // Convert JSON string to object
-    const resumeDataCopy = resumeData;
+    let resumeDataCopy;
+
+    if(typeof resumeData==='string'){
+        resumeDataCopy=await JSON.parse(resumeData);
+    }else{
+        resumeDataCopy=structuredClone(resumeData);
+    }
     console.log("parsed:", resumeDataCopy);
 
     // Upload image if provided
