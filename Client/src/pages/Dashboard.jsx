@@ -159,7 +159,7 @@ const Dashboard = () => {
           bg-gradient-to-t from-slate-600 to-slate-700
           bg-clip-text text-transparent"
         >
-          Welcome, Akagami Shanks...
+          Welcome, {user?.name}
         </p>
 
         <div className="flex gap-4 flex-wrap">
