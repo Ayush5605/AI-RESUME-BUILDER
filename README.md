@@ -1,155 +1,209 @@
-# AI Resume Builder
+# 🚀 AI Resume Builder
 
-An AI-powered Resume Builder web application that enables users to create, customize, preview, and download professional resumes with multiple templates and AI-assisted content generation.
+An AI-powered Resume Builder that helps users create professional resumes with modern templates, AI-assisted content generation, image upload support, and public resume sharing.
 
-## Features
+## 🌐 Live Demo
 
-* User Authentication using JWT
-* Secure Password Hashing with bcryptjs
-* Create and Edit Resumes
-* Multiple Resume Templates
-* Real-time Resume Preview
-* Color Theme Customization
-* AI-powered Professional Summary Generation
-* Education, Experience, Projects, and Skills Management
-* Download Resume as PDF
-* Responsive UI
+🔗 https://ai-resume-builder-flame-zeta.vercel.app
 
-## Tech Stack
+### Demo Credentials
 
-### Frontend
+**Email:** `test@gmail.com`
 
-* React.js
-* React Router DOM
-* Tailwind CSS
-* Lucide React
+**Password:** `123456`
+
+---
+
+# ✨ Features
+
+- 🔐 User Authentication (JWT)
+- 🤖 AI-powered Professional Summary Generation
+- 💼 AI-assisted Job Description Enhancement
+- 📝 Create, Edit & Delete Resumes
+- 🎨 Multiple Resume Templates
+- 🖼️ Profile Image Upload using ImageKit
+- 🌍 Public Resume Sharing
+- 📱 Responsive Design
+- ⚡ Fast React + Vite Frontend
+
+---
+
+# 🛠️ Tech Stack
+
+## Frontend
+- React.js
+- Vite
+- Redux Toolkit
+- Tailwind CSS
+- Axios
+- React Router
+
+## Backend
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- JWT Authentication
+- Multer
+- ImageKit
+
+## AI
+- Google Gemini API
+
+---
+
+# 📂 Project Structure
+
+```
+AI_Resume_builder/
+│
+├── client/        # React Frontend
+│
+└── Server/        # Express Backend
+```
+
+
+
+---
+
+# ⚙️ Installation
+
+## 1. Clone Repository
+
+```bash
+git clone https://github.com/Ayush5605/AI-Resume-Builder.git
+```
+
+## 2. Install Dependencies
 
 ### Backend
 
-* Node.js
-* Express.js
-* MongoDB
-* Mongoose
-* JWT Authentication
-* bcryptjs
-* Multer
-* dotenv
-
-## Project Structure
-
-```text
-AI_Resume_Builder/
-│
-├── Client/
-│   ├── src/
-│   ├── components/
-│   ├── pages/
-│   └── assets/
-│
-├── Server/
-│   ├── Controller/
-│   ├── Model/
-│   ├── Routes/
-│   ├── Middleware/
-│   ├── Config/
-│   ├── server.js
-│   └── .env
-│
-└── README.md
+```bash
+cd Server
+npm install
 ```
 
-## Environment Variables
-
-Create a `.env` file inside the Server folder:
-
-```env
-MONGODB_URI=your_mongodb_connection_string
-JWT_SECRET=your_secret_key
-PORT=5000
-```
-
-## Installation
-
-### Clone the Repository
+### Frontend
 
 ```bash
-git clone <your-github-url>
-cd AI_Resume_Builder
+cd client
+npm install
 ```
 
-### Backend Setup
+---
+
+# 🔑 Environment Variables
+
+## Backend (.env)
+
+```env
+PORT=4040
+
+MONGODB_URI=your_mongodb_uri
+
+JWT_SECRET=your_jwt_secret
+
+IMAGEKIT_PUBLIC_KEY=your_public_key
+IMAGEKIT_PRIVATE_KEY=your_private_key
+IMAGEKIT_URL_ENDPOINT=your_url_endpoint
+
+GEMINI_API_KEY=your_gemini_api_key
+GEMINI_BASE_URL=your_gemini_url
+GEMINI_MODEL=the_gemini_model_you_are_using
+
+```
+
+## Frontend (.env)
+
+```env
+VITE_BASE_URL=http://localhost:4040/api
+```
+
+---
+
+# ▶️ Running Locally
+
+## Backend
 
 ```bash
 cd Server
-
-npm install
-
-npm run start
-```
-
-### Frontend Setup
-
-```bash
-cd Client
-
-npm install
-
 npm run dev
 ```
 
-## API Endpoints
+## Frontend
 
-### Authentication
-
-#### Register User
-
-```http
-POST /api/users/register
+```bash
+cd client
+npm run dev
 ```
 
-Request Body:
+---
 
-```json
-{
-  "name":"John Doe",
-  "email":"john@example.com",
-  "password":"123456"
-}
-```
+# 📚 API Modules
 
-#### Login User
+- Authentication
+- Resume Management
+- AI Resume Enhancement
+- Image Upload
+- Public Resume Sharing
 
-```http
-POST /api/users/login
-```
+---
 
-## Screenshots
+# 🎯 Resume Features
 
-Add screenshots of:
+- Personal Information
+- Professional Summary
+- Skills
+- Experience
+- Projects
+- Education
+- Resume Preview
+- Public Resume Link
+- Download Ready Layout
 
-* Home Page
-* Authentication Page
-* Resume Builder
-* Template Selection
-* Resume Preview
+---
 
-## Future Enhancements
+# 🤖 AI Features
 
-* AI Resume Suggestions
-* Resume Score Analyzer
-* ATS Compatibility Checker
-* Share Resume using Public Link
-* Drag and Drop Sections
-* Multiple Export Formats
+### AI Professional Summary
 
-## Author
+Generate a professional summary based on your profile.
 
-Ayush Auti
+### AI Job Description
 
-Third Year Computer Engineering Student
+Enhance work experience descriptions using Google Gemini AI.
 
-MERN Stack Developer | AI/ML Enthusiast
+---
 
-## License
+# 📦 Deployment
 
-This project is licensed under the MIT License.
+### Frontend
+
+- Vercel
+
+### Backend
+
+- Render
+
+### Database
+
+- MongoDB Atlas
+
+### Image Storage
+
+- ImageKit
+
+---
+
+# 👨‍💻 Author
+
+**Ayush Auti**
+
+- GitHub: https://github.com/your-github-username
+- LinkedIn: https://linkedin.com/in/your-linkedin
+
+---
+
+# ⭐ Support
+
+If you found this project helpful, please consider giving it a ⭐ on GitHub.
