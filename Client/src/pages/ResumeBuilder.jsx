@@ -148,7 +148,11 @@ const ResumeBuilder = () => {
 
 
   const saveResume=async()=>{
+
     try{
+
+      console.log("Resume Data:", resumeData);
+    console.log("Personal Info:", resumeData.personal_info);
       let updatedResumeData=structuredClone(resumeData);
 
       if(typeof resumeData.personal_info.image==='object'){

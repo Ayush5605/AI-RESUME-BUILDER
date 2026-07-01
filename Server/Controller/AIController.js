@@ -114,7 +114,7 @@ Return JSON in this format:
 
   "personal_info": {
     "image": "",
-    "full_name": "",
+    "fullName": "",
     "profession": "",
     "email": "",
     "phone": "",

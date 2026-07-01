@@ -180,6 +180,12 @@ export const updateResume = async (req, res) => {
     }
 
     // Update resume
+
+    console.log(
+  "Before Save:",
+  JSON.stringify(resumeDataCopy.personal_info, null, 2)
+);
+    
     const updatedResume = await Resume.findOneAndUpdate(
       {
         _id: resumeId,
@@ -190,6 +196,10 @@ export const updateResume = async (req, res) => {
         new: true,
       }
     );
+    console.log(
+  "Saved Resume:",
+  JSON.stringify(updatedResume.personal_info, null, 2)
+);
 
     if (!updatedResume) {
       return res.status(404).json({

@@ -46,7 +46,7 @@ const ResumeSchema = new mongoose.Schema(
         default: "",
       },
 
-      full_name: {
+      fullName: {
         type: String,
         trim: true,
         default: "",
@@ -77,7 +77,7 @@ const ResumeSchema = new mongoose.Schema(
         default: "",
       },
 
-      linkedin: {
+      linkedIn: {
         type: String,
         trim: true,
         default: "",
@@ -186,5 +186,7 @@ const ResumeSchema = new mongoose.Schema(
 );
 
 const Resume = mongoose.model("Resume", ResumeSchema);
+
+console.log(Resume.schema.obj.personal_info);
 
 export default Resume;
