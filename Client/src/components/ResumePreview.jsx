@@ -4,6 +4,7 @@ import ModernTemplate from "./templates/ModernTemplate";
 import ClassicTemplate from "./templates/ClassicTemplate";
 import MinimalTemplate from "./templates/MinimalTemplate";
 import MinimalImageTemplate from "./templates/MinimalImageTemplate";
+import ProfessionalTemplate from "./templates/ProfessionalTemplate";
 
 const ResumePreview = ({
   data,
@@ -46,6 +47,14 @@ const ResumePreview = ({
           />
         );
 
+      case "professional":
+        return (
+          <ProfessionalTemplate
+            data={data}
+            accentColor={accentColor}
+          />
+        );
+
       default:
         return (
           <ModernTemplate
@@ -77,8 +86,7 @@ const ResumePreview = ({
           html,
           body {
             width: 8.5in;
-            height: 11in;
-            overflow: hidden;
+            height: auto;
           }
 
           body * {

@@ -21,6 +21,13 @@ const TemplateSelector = ({ selectedTemplate, onChange }) => {
     },
 
     {
+      id: "professional",
+      name: "Professional",
+      preview:
+        "A polished, structured layout designed for experienced professionals.",
+    },
+
+    {
       id: "minimal-image",
       name: "Minimal Image",
       preview:
