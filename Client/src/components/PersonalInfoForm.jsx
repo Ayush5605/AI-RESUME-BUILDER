@@ -68,13 +68,13 @@ const PersonalInfoForm = ({
       placeholder: "Enter your personal website URL",
     },
     {
-      key: "Github",
+      key: "gitHub",
       label: "GitHub Profile",
       icon: Computer,
       placeholder: "Enter your GitHub profile URL",
     },
     {
-      key: "LinkedIn",
+      key: "linkedIn",
       label: "LinkedIn Profile",
       icon: Link,
       placeholder: "Enter your LinkedIn profile URL",

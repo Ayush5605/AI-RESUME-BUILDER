@@ -11,14 +11,35 @@ const AuthProvider = ({ children }) => {
             const storedUser = localStorage.getItem("user");
 
             if (token && storedUser) {
-                const user = JSON.parse(storedUser);
+                // Decode token to check expiration
+                const payloadBase64 = token.split(".")[1];
+                let isExpired = false;
+                if (payloadBase64) {
+                    try {
+                        const decodedJson = atob(payloadBase64.replace(/-/g, "+").replace(/_/g, "/"));
+                        const decoded = JSON.parse(decodedJson);
+                        if (decoded.exp && Date.now() >= decoded.exp * 1000) {
+                            isExpired = true;
+                        }
+                    } catch (e) {
+                        isExpired = true;
+                    }
+                } else {
+                    isExpired = true;
+                }
 
-                dispatch(
-                    login({
-                        token,
-                        user,
-                    })
-                );
+                if (isExpired) {
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("user");
+                } else {
+                    const user = JSON.parse(storedUser);
+                    dispatch(
+                        login({
+                            token,
+                            user,
+                        })
+                    );
+                }
             }
         } catch (error) {
             console.error("Failed to restore auth state:", error);

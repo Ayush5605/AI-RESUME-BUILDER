@@ -4,11 +4,12 @@ export const dummyResumeData = [
     {
         // ----------------------------------------------------- Resume 1 ------------------------------------------------------
         personal_info: {
-            full_name: "Alex Smith",
+            fullName: "Alex Smith",
             email: "alex@example.com",
             phone: "0 123456789",
             location: "NY, USA",
-            linkedin: "https://www.linkedin.com",
+            linkedIn: "https://www.linkedin.com",
+            gitHub: "https://github.com",
             website: "https://www.example.com",
             profession: "Full Stack Developer",
             image: dummy_profile
@@ -87,11 +88,12 @@ export const dummyResumeData = [
     {
         // ----------------------------------------------------- Resume 2 ------------------------------------------------------
         personal_info: {
-            full_name: "Jordan Lee",
+            fullName: "Jordan Lee",
             email: "jordan.lee@example.com",
             phone: "0 987654321",
             location: "San Francisco, CA, USA",
-            linkedin: "https://www.linkedin.com/in/jordanlee",
+            linkedIn: "https://www.linkedin.com/in/jordanlee",
+            gitHub: "https://github.com/jordanlee",
             website: "https://www.jordanlee.dev",
             profession: "Frontend Engineer",
             image: dummy_profile
@@ -162,11 +164,12 @@ export const dummyResumeData = [
     {
         // ----------------------------------------------------- Resume 3 ------------------------------------------------------
         personal_info: {
-            full_name: "Riley Morgan",
+            fullName: "Riley Morgan",
             email: "riley.morgan@example.com",
             phone: "0 1122334455",
             location: "Austin, TX, USA",
-            linkedin: "https://www.linkedin.com/in/rileymorgan",
+            linkedIn: "https://www.linkedin.com/in/rileymorgan",
+            gitHub: "https://github.com/rileymorgan",
             website: "https://www.rileym.dev",
             profession: "Backend Developer",
             image: dummy_profile

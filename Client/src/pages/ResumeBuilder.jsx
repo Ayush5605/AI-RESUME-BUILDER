@@ -174,6 +174,11 @@ const ResumeBuilder = () => {
         toast.success(data.message);
 
     }catch(e){
+       console.log("Status:", e.response?.status);
+  console.log("Response:", e.response?.data);
+  console.log("Message:", e.message);
+
+  
 
       console.error("Error in saving resume",e);
 

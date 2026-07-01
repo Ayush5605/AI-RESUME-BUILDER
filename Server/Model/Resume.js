@@ -83,6 +83,12 @@ const ResumeSchema = new mongoose.Schema(
         default: "",
       },
 
+      gitHub: {
+        type: String,
+        trim: true,
+        default: "",
+      },
+
       website: {
         type: String,
         trim: true,

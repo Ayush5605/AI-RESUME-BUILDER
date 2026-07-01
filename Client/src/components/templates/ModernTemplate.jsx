@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, Globe, Link } from "lucide-react";
+import { Mail, Phone, MapPin, Globe, Link, Computer } from "lucide-react";
 
 const ModernTemplate = ({ data, accentColor }) => {
   const formatDate = (dateStr) => {
@@ -46,9 +46,9 @@ const ModernTemplate = ({ data, accentColor }) => {
           )}
 
           {/* LinkedIn */}
-          {data?.personal_info?.linkedin && (
+          {data?.personal_info?.linkedIn && (
             <a
-              href={data.personal_info.linkedin}
+              href={data.personal_info.linkedIn}
               target="_blank"
               rel="noreferrer"
               className="flex items-center gap-2"
@@ -56,7 +56,27 @@ const ModernTemplate = ({ data, accentColor }) => {
               <Link className="size-4" />
 
               <span className="break-all text-xs">
-                {data.personal_info.linkedin
+                {data.personal_info.linkedIn
+                  .replace("https://www.", "")
+                  .replace("http://www.", "")
+                  .replace("https://", "")
+                  .replace("http://", "")}
+              </span>
+            </a>
+          )}
+
+          {/* GitHub */}
+          {data?.personal_info?.gitHub && (
+            <a
+              href={data.personal_info.gitHub}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-2"
+            >
+              <Computer className="size-4" />
+
+              <span className="break-all text-xs">
+                {data.personal_info.gitHub
                   .replace("https://www.", "")
                   .replace("http://www.", "")
                   .replace("https://", "")

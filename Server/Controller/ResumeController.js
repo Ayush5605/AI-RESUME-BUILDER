@@ -7,7 +7,42 @@ import fs from "fs";
 
 import Resume from "../Model/Resume.js";
 
+const normalizePersonalInfo = (resumeObj) => {
+  if (resumeObj && resumeObj.personal_info) {
+    const pi = resumeObj.personal_info;
 
+    // Normalize fullName
+    if (!pi.fullName && pi.full_name) {
+      pi.fullName = pi.full_name;
+    }
+    // Normalize linkedIn
+    if (!pi.linkedIn && pi.linkedin) {
+      pi.linkedIn = pi.linkedin;
+    }
+    if (!pi.linkedIn && pi.LinkedIn) {
+      pi.linkedIn = pi.LinkedIn;
+    }
+    // Normalize gitHub
+    if (!pi.gitHub && pi.github) {
+      pi.gitHub = pi.github;
+    }
+    if (!pi.gitHub && pi.Github) {
+      pi.gitHub = pi.Github;
+    }
+    if (!pi.gitHub && pi.GitHub) {
+      pi.gitHub = pi.GitHub;
+    }
+
+    // Remove legacy/incorrect fields
+    delete pi.full_name;
+    delete pi.linkedin;
+    delete pi.LinkedIn;
+    delete pi.github;
+    delete pi.Github;
+    delete pi.GitHub;
+  }
+  return resumeObj;
+};
 
 //controller for getting user resumes
 //get :/api/users/resumes
@@ -17,7 +52,8 @@ export const getUserResumes=async(req,res)=>{
 
         const userId=req.userId;
 
-        const resumes=await Resume.find({userId});
+        const resumes=await Resume.find({userId}).lean();
+        resumes.forEach(normalizePersonalInfo);
         return res.status(200).json({resumes})
 
     }catch(error){
@@ -75,11 +111,13 @@ export const getResumeById=async(req,res)=>{
         const userId=req.userId;
         const{resumeId}=req.params;
 
-        const resume=await Resume.findOne({userId,_id:resumeId})
+        const resume=await Resume.findOne({userId,_id:resumeId}).lean();
 
         if(!resume){
             return res.status(404).json({message:"Resume Not Found!"})
         }
+
+        normalizePersonalInfo(resume);
 
         resume.__v=undefined;
         resume.createdAt=undefined;
@@ -107,12 +145,14 @@ export const getPublicResumeById=async(req,res)=>{
         const{resumeId}=req.params;
          console.log("Requested Resume ID:", resumeId);
 
-        const resume=await Resume.findOne({public:true,_id:resumeId});
+        const resume=await Resume.findOne({public:true,_id:resumeId}).lean();
         console.log("Resume Found:", resume);
 
         if(!resume){
             return res.status(404).json({message:"Resume Not Found!"})
         }
+
+        normalizePersonalInfo(resume);
 
         resume.__v=undefined;
         resume.createdAt=undefined;
@@ -158,6 +198,9 @@ export const updateResume = async (req, res) => {
     }
     console.log("parsed:", resumeDataCopy);
 
+    // Normalize personal_info fields before save
+    normalizePersonalInfo(resumeDataCopy);
+
     // Upload image if provided
     if (image) {
       const imageBufferData = fs.createReadStream(image.path);
@@ -191,14 +234,29 @@ export const updateResume = async (req, res) => {
         _id: resumeId,
         userId,
       },
-      resumeDataCopy,
+      {
+        $set: resumeDataCopy,
+        $unset: {
+          "personal_info.full_name": "",
+          "personal_info.linkedin": "",
+          "personal_info.LinkedIn": "",
+          "personal_info.github": "",
+          "personal_info.Github": "",
+          "personal_info.GitHub": "",
+        }
+      },
       {
         new: true,
       }
-    );
+    ).lean();
+    
+    if (updatedResume) {
+      normalizePersonalInfo(updatedResume);
+    }
+
     console.log(
   "Saved Resume:",
-  JSON.stringify(updatedResume.personal_info, null, 2)
+  JSON.stringify(updatedResume ? updatedResume.personal_info : {}, null, 2)
 );
 
     if (!updatedResume) {

@@ -119,7 +119,8 @@ Return JSON in this format:
     "email": "",
     "phone": "",
     "location": "",
-    "linkedin": "",
+    "linkedIn": "",
+    "gitHub": "",
     "website": ""
   },
 
@@ -174,6 +175,34 @@ Return JSON in this format:
     const extractedData = response.choices[0].message.content.trim();
 
     const parsedData = JSON.parse(extractedData);
+
+    if (parsedData.personal_info) {
+      const pi = parsedData.personal_info;
+
+      // Normalize fullName / full_name
+      const name = pi.fullName || pi.full_name;
+      if (name) {
+        pi.fullName = name;
+        delete pi.full_name;
+      }
+
+      // Normalize linkedIn / linkedin / LinkedIn
+      const li = pi.linkedIn || pi.linkedin || pi.LinkedIn;
+      if (li) {
+        pi.linkedIn = li;
+        delete pi.linkedin;
+        delete pi.LinkedIn;
+      }
+
+      // Normalize gitHub / github / Github / GitHub
+      const gh = pi.gitHub || pi.github || pi.Github || pi.GitHub;
+      if (gh) {
+        pi.gitHub = gh;
+        delete pi.github;
+        delete pi.Github;
+        delete pi.GitHub;
+      }
+    }
 
     const newResume = await Resume.create({
       userId,
